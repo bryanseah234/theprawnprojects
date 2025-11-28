@@ -52,8 +52,27 @@ const App: React.FC = () => {
 
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-64 border-3 border-neo-black animate-pulse bg-gray-100 shadow-neo"></div>
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div 
+                key={i} 
+                className="border-3 border-neo-black bg-neo-white p-6 shadow-neo h-72 flex flex-col"
+              >
+                {/* Title Skeleton */}
+                <div className="h-8 bg-neo-black w-3/4 mb-4 animate-pulse" />
+                
+                {/* Divider */}
+                <div className="border-b-3 border-neo-black mb-6 w-full opacity-20" />
+                
+                {/* Metadata Skeleton */}
+                <div className="space-y-4 flex-grow">
+                  <div className="h-4 bg-neo-grey w-1/2 border-2 border-neo-black animate-pulse" />
+                  <div className="h-4 bg-neo-grey w-2/3 border-2 border-neo-black animate-pulse" style={{ animationDelay: '100ms' }} />
+                  <div className="h-4 bg-neo-grey w-1/3 border-2 border-neo-black animate-pulse" style={{ animationDelay: '200ms' }} />
+                </div>
+                
+                {/* Button Skeleton */}
+                <div className="h-12 w-full border-3 border-neo-black bg-gray-100 mt-4 animate-pulse" />
+              </div>
             ))}
           </div>
         ) : projects.length > 0 ? (

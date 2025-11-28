@@ -117,10 +117,7 @@ const App: React.FC = () => {
           </div>
           <div className="text-right">
              <p className="text-sm font-bold uppercase opacity-50">
-               © {new Date().getFullYear()} Prawn Projects.
-             </p>
-             <p className="text-xs font-bold uppercase opacity-50">
-               Built with React & Tailwind.
+               © {new Date().getFullYear()} 紅衣 (RED SHIRT)
              </p>
           </div>
         </div>

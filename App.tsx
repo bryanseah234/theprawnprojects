@@ -35,7 +35,7 @@ const App: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
           <h1 className="text-5xl md:text-8xl font-bold uppercase tracking-tighter leading-none">
             The Prawn<br />
-            <span className="bg-neo-yellow px-2 inline-block transform -skew-x-6 border-3 border-neo-black shadow-neo">Projects</span>
+            <span className="bg-neo-grey px-2 inline-block transform -skew-x-6 border-3 border-neo-black shadow-neo">Projects</span>
           </h1>
           <div className="text-right">
             <h2 className="text-4xl font-bold uppercase">b</h2>
@@ -49,11 +49,11 @@ const App: React.FC = () => {
       {/* Projects Grid */}
       <main className="flex-grow">
         <div className="mb-8 flex items-center justify-between">
-          <h3 className="text-3xl font-bold uppercase decoration-neo-yellow underline decoration-4 underline-offset-4">
+          <h3 className="text-3xl font-bold uppercase decoration-neo-grey underline decoration-4 underline-offset-4">
             Deployed Works
           </h3>
           {error && (
-            <span className="text-xs font-bold bg-neo-yellow border-2 border-neo-black px-2 py-1 uppercase hidden md:inline-block">
+            <span className="text-xs font-bold bg-neo-grey border-2 border-neo-black px-2 py-1 uppercase hidden md:inline-block">
               Connection Error
             </span>
           )}
@@ -82,7 +82,7 @@ const App: React.FC = () => {
                   
                   {project.link ? (
                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="block mt-4">
-                      <NeoButton className="w-full text-center group-hover:bg-neo-yellow transition-colors">
+                      <NeoButton className="w-full text-center group-hover:bg-neo-grey transition-colors">
                         View Project
                       </NeoButton>
                     </a>

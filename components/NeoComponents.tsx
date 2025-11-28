@@ -36,7 +36,7 @@ export const NeoButton: React.FC<NeoButtonProps> = ({ children, className = '', 
         px-6 py-3 font-bold uppercase tracking-wider
         border-3 border-neo-black bg-neo-white
         shadow-neo active:shadow-none active:translate-x-[5px] active:translate-y-[8px]
-        transition-all duration-100 hover:bg-neo-yellow
+        transition-all duration-100 hover:bg-neo-grey
         disabled:opacity-50 disabled:cursor-not-allowed
         ${className}
       `}
@@ -56,7 +56,7 @@ export const NeoLink: React.FC<NeoLinkProps> = ({ children, className = '', ...p
     <a
       className={`
         text-xl font-bold uppercase
-        hover:bg-neo-yellow hover:text-neo-black px-1
+        hover:bg-neo-grey hover:text-neo-black px-1
         border-b-3 border-transparent hover:border-neo-black
         transition-all duration-200
         ${className}

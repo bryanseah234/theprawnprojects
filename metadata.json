@@ -1,0 +1,5 @@
+{
+  "name": "prawnprojects",
+  "description": "An automated Neobrutalist portfolio pulling projects from Vercel API.",
+  "requestFramePermissions": []
+}

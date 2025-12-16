@@ -1,4 +1,4 @@
-# The Prawn Projects
+# Prawn Projects
 
 A self-updating Neobrutalist portfolio that automatically syncs with your Vercel deployments.
 

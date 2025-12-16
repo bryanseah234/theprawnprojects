@@ -44,7 +44,7 @@ const App: React.FC = () => {
       <header className="flex justify-center items-center border-b-3 border-neo-black pb-6 md:pb-8 pt-4 overflow-hidden">
         {/* Responsive text sizing: uses vw units on mobile to force fit, clamps on larger screens */}
         <h1 className="text-[6vw] sm:text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-none text-center whitespace-nowrap w-full">
-          The Prawn <span className="bg-neo-grey px-2 inline-block transform -skew-x-6 border-3 border-neo-black shadow-neo ml-1 sm:ml-4">Projects</span>
+          Prawn <span className="bg-neo-grey px-2 inline-block transform -skew-x-6 border-3 border-neo-black shadow-neo ml-1 sm:ml-4">Projects</span>
         </h1>
       </header>
 

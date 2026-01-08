@@ -49,16 +49,21 @@ export const fetchProjects = async (): Promise<Project[]> => {
       let liveUrl = null;
 
       // Helper to find the best URL from a list of aliases
-      // We prioritize custom domains (no .vercel.app) first, then shortest alias
-      // This ensures clean URLs like example.com over project-hash.vercel.app
+      // Priority: hong-yi.me domain > custom domains > vercel.app domains
       const getBestAlias = (aliases: string[]) => {
         if (!aliases || aliases.length === 0) return null;
         
-        // Separate custom domains from vercel.app domains
+        // If only 1 alias, use it
+        if (aliases.length === 1) return aliases[0];
+        
+        // If more than 1 alias, prioritize hong-yi.me domain
+        const hongYiDomain = aliases.find(a => a.includes('hong-yi.me'));
+        if (hongYiDomain) return hongYiDomain;
+        
+        // Fallback: prefer custom domains over vercel.app domains, shortest first
         const customDomains = aliases.filter(a => !a.includes('.vercel.app'));
         const vercelDomains = aliases.filter(a => a.includes('.vercel.app'));
         
-        // Prefer custom domains, then vercel domains, sorted by length (shortest first)
         if (customDomains.length > 0) {
           return customDomains.sort((a, b) => a.length - b.length)[0];
         }

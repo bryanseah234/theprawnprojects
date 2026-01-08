@@ -49,25 +49,59 @@ export const fetchProjects = async (): Promise<Project[]> => {
       let liveUrl = null;
 
       // Helper to find the best URL from a list of aliases
-      // We prioritize the SHORTEST alias, as this is usually the custom domain (example.com) 
-      // or the clean project URL (project.vercel.app), avoiding the long git-hash URLs.
+      // We prioritize custom domains (no .vercel.app) first, then shortest alias
+      // This ensures clean URLs like example.com over project-hash.vercel.app
       const getBestAlias = (aliases: string[]) => {
         if (!aliases || aliases.length === 0) return null;
-        return aliases.sort((a, b) => a.length - b.length)[0];
+        
+        // Separate custom domains from vercel.app domains
+        const customDomains = aliases.filter(a => !a.includes('.vercel.app'));
+        const vercelDomains = aliases.filter(a => a.includes('.vercel.app'));
+        
+        // Prefer custom domains, then vercel domains, sorted by length (shortest first)
+        if (customDomains.length > 0) {
+          return customDomains.sort((a, b) => a.length - b.length)[0];
+        }
+        if (vercelDomains.length > 0) {
+          return vercelDomains.sort((a, b) => a.length - b.length)[0];
+        }
+        return null;
       };
 
-      // Strategy 1: Check Production Target Aliases (Custom Domains live here)
-      const productionAlias = getBestAlias(p.targets?.production?.alias);
-      
-      // Strategy 2: Check Latest Deployment Aliases
-      const deploymentAlias = getBestAlias(p.latestDeployments?.[0]?.alias);
+      // Strategy 1: Use the project's canonical link if available (most up-to-date)
+      // This is set by Vercel and reflects the current project URL name
+      if (p.link?.type === 'deploymentAlias' && p.link?.deploymentAlias) {
+        liveUrl = `https://${p.link.deploymentAlias}`;
+      }
 
-      if (productionAlias) {
-        liveUrl = `https://${productionAlias}`;
-      } else if (deploymentAlias) {
-        liveUrl = `https://${deploymentAlias}`;
-      } else if (p.targets?.production?.url) {
-        // Fallback to the long generated URL if no aliases exist
+      // Strategy 2: Check project-level aliases (custom domains and project URLs)
+      if (!liveUrl && p.alias && Array.isArray(p.alias)) {
+        const projectAlias = getBestAlias(p.alias.map((a: any) => 
+          typeof a === 'string' ? a : a.domain
+        ).filter(Boolean));
+        if (projectAlias) {
+          liveUrl = `https://${projectAlias}`;
+        }
+      }
+
+      // Strategy 3: Check Production Target Aliases (Custom Domains live here)
+      if (!liveUrl) {
+        const productionAlias = getBestAlias(p.targets?.production?.alias);
+        if (productionAlias) {
+          liveUrl = `https://${productionAlias}`;
+        }
+      }
+      
+      // Strategy 4: Check Latest Deployment Aliases (most recent deployment)
+      if (!liveUrl) {
+        const deploymentAlias = getBestAlias(p.latestDeployments?.[0]?.alias);
+        if (deploymentAlias) {
+          liveUrl = `https://${deploymentAlias}`;
+        }
+      }
+
+      // Strategy 5: Fallback to the production target URL
+      if (!liveUrl && p.targets?.production?.url) {
         liveUrl = `https://${p.targets.production.url}`;
       }
 

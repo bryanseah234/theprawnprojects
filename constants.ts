@@ -31,3 +31,6 @@ export const TEAM_ID =
   getEnvVar('VITE_TEAM_ID') ||
   getEnvVar('TEAM_ID') || 
   '';
+
+// Preferred domain for URL resolution when multiple aliases exist
+export const PREFERRED_DOMAIN = 'hong-yi.me';

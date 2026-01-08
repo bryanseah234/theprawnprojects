@@ -1,5 +1,5 @@
 import { Project, VercelProjectResponse } from '../types';
-import { VERCEL_API_TOKEN, TEAM_ID } from '../constants';
+import { VERCEL_API_TOKEN, TEAM_ID, PREFERRED_DOMAIN } from '../constants';
 
 export const fetchProjects = async (): Promise<Project[]> => {
   // Verbose logging for debugging API connection issues
@@ -56,9 +56,9 @@ export const fetchProjects = async (): Promise<Project[]> => {
         // If only 1 alias, use it
         if (aliases.length === 1) return aliases[0];
         
-        // If more than 1 alias, prioritize hong-yi.me domain
-        const hongYiDomain = aliases.find(a => a.includes('hong-yi.me'));
-        if (hongYiDomain) return hongYiDomain;
+        // If more than 1 alias, prioritize preferred domain (hong-yi.me)
+        const preferredDomain = aliases.find(a => a.includes(PREFERRED_DOMAIN));
+        if (preferredDomain) return preferredDomain;
         
         // Fallback: prefer custom domains over vercel.app domains, shortest first
         const customDomains = aliases.filter(a => !a.includes('.vercel.app'));

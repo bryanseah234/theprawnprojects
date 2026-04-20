@@ -16,7 +16,7 @@
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.1.0",
     "typescript": "~5.8.2",
-    "vite": "^7.3.2"
+    "vite": "^8.0.9"
   },
   "overrides": {
     "picomatch": "4.0.4",
